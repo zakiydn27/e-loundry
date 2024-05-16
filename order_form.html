@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+<form id="orderForm" action="#" method="get">
+  <h1>Formulir Pemesanan</h1>
+    <label for="name">Nama:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required><br>
+
+    <label for="address">Alamat:</label>
+    <textarea id="address" name="address" rows="4" required></textarea><br>
+
+    <label for="package">Pilih Paket:</label>
+    <select id="package" name="package">
+        <option value="Paket Reguler">Paket Reguler</option>
+        <option value="Paket Kilat (Same Day)">Paket Kilat (Same Day)</option>
+        <option value="Paket Pewangi Khusus">Paket Pewangi Khusus</option>
+    </select>
+    <br><br>
+
+    <!-- Tombol submit order -->
+    <button type="submit" onclick="generateInvoice()">Order Sekarang</button>
+</form>
+
+<script>
+function generateInvoice() {
+  var name = document.getElementById('name').value;
+  var phone = document.getElementById('phone').value;
+  var address = document.getElementById('address').value;
+  var package = document.getElementById('package').value;
+
+  var notaNumber = generateNotaNumber();
+  var total;
+  if (package === 'Paket Reguler') {
+    total = 6000 * 4.21;
+  } else if (package === 'Paket Kilat (Same Day)') {
+    total = 25 * 4.21;
+  } else if (package === 'Paket Pewangi Khusus') {
+    total = 15000 * 4.21;
+  }
+
+  var invoiceMessage = `E-Loundry Fresh 88 Laundry
+Permata Sompok Asri - Bandung
+6289528434601
+
+Nomer Nota : ${notaNumber}
+
+Pelanggan Yth : ${name}
+Phone : ${phone}
+Alamat : ${address}
+
+======================
+Detail pesanan:
+Layanan:
+✅ ${package}, 4.21 KG
+@ Rp${total.toFixed(2)}, Total Rp${total.toFixed(2)}  
+
+Status: Lunas
+=================
+Syarat dan ketentuan:
+PERHATIAN :
+1. Jika barang sudah sampai/selesai harap mengembalikan nota yang telah di berikan
+2. Jumlah pakaian yang tidak dihitung oleh customer bukan tanggung jawab laundry, dan jumlah hitungan laundry dianggap benar
+3. Klaim luntur tidak dipisah diluar tanggungan
+4. Hak klaim berlaku 8 jam setelah barang diambil
+5. Buka setiap hari pukul 07.00 - 19.30 WIB
+6. Kritik dan saran dapat disampaikan melalui (sms/wa) 08135 991 3338 / 08384 8090 111
+7. Konsumen dianggap setuju dengan aturan di atas
+
+Terima kasih
+`;
+  
+  sendToWhatsApp(invoiceMessage);
+}
+
+function sendToWhatsApp(message) {
+  // Ganti nomor WA sesuai kebutuhan
+  var whatsappUrl = "https://wa.me/6289528434601?text=" + encodeURIComponent(message);
+  window.open(whatsappUrl, "_blank");
+}
+
+function generateNotaNumber() {
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = '';
+  var charactersLength = characters.length;
+  for (var i = 0; i < 20; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+</script>
+
+</body>
+</html>

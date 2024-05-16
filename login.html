@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Verifikasi WhatsApp</h2>
+    <form id="loginForm">
+      <label for="phoneNumber">Nomor WhatsApp:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required>
+      <button type="button" id="sendOTPButton">Kirim OTP</button>
+    </form>
+    <div id="otpContainer" class="slide-out">
+      <label for="otp">Masukkan OTP:</label>
+      <input type="text" id="otp" name="otp" required>
+      <button type="button" id="verifyOTPButton">Verifikasi OTP</button>
+    </div>
+    <div id="errorMessage"></div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
